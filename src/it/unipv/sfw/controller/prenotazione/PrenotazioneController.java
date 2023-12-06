@@ -4,7 +4,7 @@ import it.unipv.sfw.model.albergo.IntAlbergo;
 import it.unipv.sfw.view.ViewController;
 
 public class PrenotazioneController {
-
+/*
 	
 	private PrenotaOpUffActionListener prenotaOpUff;
 	private PrenotaPazActionListener prenotaPaz;
@@ -21,10 +21,10 @@ public class PrenotazioneController {
 	private ScegliPrestazioneActionListener scegliPrest;
 	private SuccessivoActionListener successivo;
 	private PrecedenteActionListener precedente;
-
+*/
 	
 	public PrenotazioneController (IntAlbergo model, ViewController view) {
-		
+	/*	
 		prenotaOpUff = new PrenotaOpUffActionListener(view);
 		prenotaPaz = new PrenotaPazActionListener(view);
 		
@@ -80,7 +80,7 @@ public class PrenotazioneController {
 		view.getPrenotatiPanelPaziente().getPrecedente().addActionListener(precedente);
 		view.getPrenotatiPanelUfficio().getPrecedente().addActionListener(precedente);
 		
-		
+		*/
 	}
 }
 
