@@ -4,9 +4,12 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
-public class LoginPanel  extends JPanel{
-
+public class LoginPanel  extends JPanel{		//PANNELLO DI LOGIN, la prima schermata
+	
+	
+	//la funzionalità di questa riga è stata spiegata in it.unipb.sfw.view
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private  JTextField username;
 	private  JPasswordField password;
@@ -19,16 +22,16 @@ public class LoginPanel  extends JPanel{
 		setVisible(true);
 		setLayout(new GridLayout(5,2));
 
-		password = new JPasswordField();
 		username = new JTextField();
+		password = new JPasswordField();
 		lblLogin = new JLabel("Username\n");
 		lblPsw = new JLabel ("Password");
 		btnAccedi = new JButton("ACCEDI");
 		btnPswdimenticata = new JButton("Password Dimenticata");
 		
-		
-		add(password);
+		//aggiungi a schermo i bottoni e tutto il resto
 		add(username);
+		add(password);
 		add(lblLogin);
 		add(btnAccedi);
 		add(btnPswdimenticata);
@@ -36,6 +39,7 @@ public class LoginPanel  extends JPanel{
 	}
 
 
+	//GETTERS E SETTERS
 	public JPanel getContentPane() {
 		return contentPane;
 	}

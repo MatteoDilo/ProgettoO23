@@ -10,7 +10,11 @@ import it.unipv.sfw.view.prenotazione.PrenotaPanelCliente;
 
 public class ViewController extends JFrame {
 	
+	//Questa riga definisce un campo privato (private) chiamato serialVersionUID che
+	//serve a controllare la compatibilità della versione della classe serializzata quando
+	//viene deserializzata.
 	private static final long serialVersionUID = 1L;
+	//
 	private JFrame frame;
 	private JPanel panel;
 	private LoginPanel loginP;
@@ -19,10 +23,10 @@ public class ViewController extends JFrame {
 	private CancellaPrenotazionePanelCliente cancellaPre;
 	
 	public ViewController() {
-		frame = new JFrame();
-		panel = new JPanel();
+		frame = new JFrame();		//istanzio un nuovo jframe
+		panel = new JPanel();		//istanzio un nuovo jpanel
 
-		Image icon = Toolkit.getDefaultToolkit().getImage("img\\icona.png");  
+		Image icon = Toolkit.getDefaultToolkit().getImage("img\\icona.png");  //da qui prendo l'icona
 		frame.setIconImage(icon);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,18 +38,18 @@ public class ViewController extends JFrame {
 		
 		frame.getContentPane().add(panel);
 		
-		loginP = new LoginPanel();
+		loginP = new LoginPanel();		//nuovo pannello di login
 		panel.add(loginP);
 		
-		ClienteC = new ClientePanel();
+		ClienteC = new ClientePanel();	//nuovo pannello per il cliente
 		panel.add(ClienteC);
 		ClienteC.setVisible(false);
 		
-		prenotatiC = new PrenotaPanelCliente();
+		prenotatiC = new PrenotaPanelCliente();	//nuovo pannello per la prenotazione
 		panel.add(prenotatiC);
 		prenotatiC.setVisible(false);
 		
-		cancellaPre = new CancellaPrenotazionePanelCliente();
+		cancellaPre = new CancellaPrenotazionePanelCliente();	//nuovo pannello per la cancellazione di una prenotazione
 		panel.add(cancellaPre);
 		cancellaPre.setVisible(false);
 		

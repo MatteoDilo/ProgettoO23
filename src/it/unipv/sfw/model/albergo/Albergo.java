@@ -65,6 +65,21 @@ public class Albergo implements IntAlbergo {
 		return check;
 	}
 	
+	public HashMap<String, IAccount> getCfPersone() {
+		return cfPersone;
+	}
+
+	public void setCfPersone(HashMap<String, IAccount> cfPersone) {
+		this.cfPersone = cfPersone;
+	}
+	
+	public void setUtenteCorrente(String cf) {
+		this.utenteCorrente = this.cfPersone.get(cf);
+	}
+	
+	public IAccount getUtenteCorrente() {
+		return utenteCorrente;
+	}
 	
 	
 	
