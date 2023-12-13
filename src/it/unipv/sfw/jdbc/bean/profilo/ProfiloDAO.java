@@ -18,21 +18,21 @@ public class ProfiloDAO implements IProfiloDAO {
 	@Override
 	public ArrayList<ProfiloDB> selectAllProfili() {
 		ArrayList<ProfiloDB> accounts = new ArrayList<>();
-		conn = ConnessioneDB.startConnection(conn, "hospitalmanager");
+		conn = ConnessioneDB.startConnection(conn, "albergo");
 		Statement st1;
 		ResultSet rs1;
 		
 		try {
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM hospitalmanager.PROFILI";
+			String query = "SELECT * FROM user";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				ProfiloDB a = new ProfiloDB(rs1.getString("CF"), rs1.getString("TIPO"),
-						rs1.getString("PW"), rs1.getString("SPECIALIZZAZIONE"), rs1.getString("NOME"), rs1.getString("COGNOME"),
-						rs1.getString("SESSO"), rs1.getString("DATA_NASCITA"), rs1.getString("LUOGO_NASCITA"), rs1.getString("PROVINCIA_NASCITA"),
-						rs1.getString("REGIONE_RESIDENZA"), rs1.getString("PROVINCIA_RESIDENZA"), rs1.getString("CITTA_RESIDENZA"), rs1.getString("INDIRIZZO"),
-						rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("CELLULARE"));
+				ProfiloDB a = new ProfiloDB(rs1.getInt("ID_USER"), rs1.getString("CF"),
+						rs1.getString("NOME"), rs1.getString("COGNOME"), rs1.getString("DATA_NASCITA"), rs1.getString("CELLULARE"),
+						 rs1.getString("INDIRIZZO"), rs1.getString("CITTA"), rs1.getString("PROVINCIA"),
+						rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("USERNAME"), rs1.getString("PASSWORD"),
+						rs1.getString("ID_TIPO"));
 				accounts.add(a);
 			}
 		}
@@ -46,25 +46,57 @@ public class ProfiloDAO implements IProfiloDAO {
 	}
 
 	@Override
-	public ArrayList<ProfiloDB> selectAllPazienti() {
+	public ArrayList<ProfiloDB> selectAllDipendenti() {
 		// TODO Auto-generated method stub
-		ArrayList<ProfiloDB> pazienti = new ArrayList<>();
-		conn = ConnessioneDB.startConnection(conn, "hospitalmanager");
+		ArrayList<ProfiloDB> dipendenti = new ArrayList<>();
+
+		conn = ConnessioneDB.startConnection(conn, "albergo");
 		Statement st1;
 		ResultSet rs1;
 		
 		try {
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM hospitalmanager.PROFILI WHERE tipo = 'PA'";
+			String query = "SELECT * FROM USER WHERE ID_TIPO = '2'";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				ProfiloDB a = new ProfiloDB(rs1.getString("CF"), rs1.getString("TIPO"),
-						rs1.getString("PW"), rs1.getString("SPECIALIZZAZIONE"), rs1.getString("NOME"), rs1.getString("COGNOME"),
-						rs1.getString("SESSO"), rs1.getString("DATA_NASCITA"), rs1.getString("LUOGO_NASCITA"), rs1.getString("PROVINCIA_NASCITA"),
-						rs1.getString("REGIONE_RESIDENZA"), rs1.getString("PROVINCIA_RESIDENZA"), rs1.getString("CITTA_RESIDENZA"), rs1.getString("INDIRIZZO"),
-						rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("CELLULARE"));
-				pazienti.add(a);
+				ProfiloDB a = new ProfiloDB(rs1.getInt("ID_USER"), rs1.getString("CF"),
+						rs1.getString("NOME"), rs1.getString("COGNOME"), rs1.getString("DATA_NASCITA"), rs1.getString("CELL"),
+						 rs1.getString("VIA"), rs1.getString("CITTA"), rs1.getString("PROVINCIA"),
+						rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("USERNAME"), rs1.getString("PASSWORD"),
+						rs1.getString("ID_TIPO"));
+				dipendenti.add(a);
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		ConnessioneDB.closeConnection(conn);
+		return dipendenti;
+	}
+
+	
+	@Override 
+	public ArrayList<ProfiloDB> selectAllClienti() {
+		// TODO Auto-generated method stub
+		ArrayList<ProfiloDB> clienti = new ArrayList<>();
+		conn = ConnessioneDB.startConnection(conn, "albergo");
+		Statement st1;
+		ResultSet rs1;
+		
+		try {
+			st1 = conn.createStatement();
+			String query = "SELECT * FROM USER WHERE ID_TIPO = '1'";
+			rs1 = st1.executeQuery(query);
+			
+			while(rs1.next()) {
+				ProfiloDB a = new ProfiloDB(rs1.getInt("ID_USER"), rs1.getString("CF"),
+						rs1.getString("NOME"), rs1.getString("COGNOME"), rs1.getString("DATA_NASCITA"), rs1.getString("CELL"),
+						 rs1.getString("VIA"), rs1.getString("CITTA"), rs1.getString("PROVINCIA"),
+						rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("USERNAME"), rs1.getString("PASSWORD"),
+						rs1.getString("ID_TIPO"));
+				clienti.add(a);
 			}
 		}
 		catch(Exception e){
@@ -73,125 +105,32 @@ public class ProfiloDAO implements IProfiloDAO {
 		
 		ConnessioneDB.closeConnection(conn);
 		
-		return pazienti;
+		return clienti;
 	}
-
+	
 	@Override
-	public ArrayList<ProfiloDB> selectAllMedici() {
+	public ProfiloDB selectProfiloByUsername(String username, TipoAccount tipo) {
 		// TODO Auto-generated method stub
-		ArrayList<ProfiloDB> medici = new ArrayList<>();
-
-		conn = ConnessioneDB.startConnection(conn, "hospitalmanager");
-		Statement st1;
-		ResultSet rs1;
+		ProfiloDB prof = null;
 		
-		try {
-			st1 = conn.createStatement();
-			String query = "SELECT * FROM hospitalmanager.PROFILI WHERE tipo = 'ME'";
-			rs1 = st1.executeQuery(query);
-			
-			while(rs1.next()) {
-				ProfiloDB a = new ProfiloDB(rs1.getString("CF"), rs1.getString("TIPO"),
-						rs1.getString("PW"), rs1.getString("SPECIALIZZAZIONE"), rs1.getString("NOME"), rs1.getString("COGNOME"),
-						rs1.getString("SESSO"), rs1.getString("DATA_NASCITA"), rs1.getString("LUOGO_NASCITA"), rs1.getString("PROVINCIA_NASCITA"),
-						rs1.getString("REGIONE_RESIDENZA"), rs1.getString("PROVINCIA_RESIDENZA"), rs1.getString("CITTA_RESIDENZA"), rs1.getString("INDIRIZZO"),
-						rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("CELLULARE"));
-				medici.add(a);
-			}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		ConnessioneDB.closeConnection(conn);
-		return medici;
-	}
-
-	@Override
-	public ArrayList<ProfiloDB> selectAllOperatoriSanitari() {
-		// TODO Auto-generated method stub
-		ArrayList<ProfiloDB> operatoriSanitari = new ArrayList<>();
-
-		conn = ConnessioneDB.startConnection(conn, "hospitalmanager");
-		Statement st1;
-		ResultSet rs1;
-		
-		try {
-			st1 = conn.createStatement();
-			String query = "SELECT * FROM hospitalmanager.PROFILI WHERE tipo = 'OS'";
-			rs1 = st1.executeQuery(query);
-			
-			while(rs1.next()) {
-				ProfiloDB a = new ProfiloDB(rs1.getString("CF"), rs1.getString("TIPO"),
-						rs1.getString("PW"), rs1.getString("SPECIALIZZAZIONE"), rs1.getString("NOME"), rs1.getString("COGNOME"),
-						rs1.getString("SESSO"), rs1.getString("DATA_NASCITA"), rs1.getString("LUOGO_NASCITA"), rs1.getString("PROVINCIA_NASCITA"),
-						rs1.getString("REGIONE_RESIDENZA"), rs1.getString("PROVINCIA_RESIDENZA"), rs1.getString("CITTA_RESIDENZA"), rs1.getString("INDIRIZZO"),
-						rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("CELLULARE"));
-				operatoriSanitari.add(a);
-			}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		ConnessioneDB.closeConnection(conn);
-		return operatoriSanitari;
-	}
-
-	@Override
-	public ArrayList<ProfiloDB> selectAlloperatoriUfficio() {
-		// TODO Auto-generated method stub
-		ArrayList<ProfiloDB> operatoriUfficio = new ArrayList<>();
-
-		conn = ConnessioneDB.startConnection(conn, "hospitalmanager");
-		Statement st1;
-		ResultSet rs1;
-		
-		try {
-			st1 = conn.createStatement();
-			String query = "SELECT * FROM hospitalmanager.PROFILI WHERE tipo = 'OU'";
-			rs1 = st1.executeQuery(query);
-			
-			while(rs1.next()) {
-				ProfiloDB a = new ProfiloDB(rs1.getString("CF"), rs1.getString("TIPO"),
-						rs1.getString("PW"), rs1.getString("SPECIALIZZAZIONE"), rs1.getString("NOME"), rs1.getString("COGNOME"),
-						rs1.getString("SESSO"), rs1.getString("DATA_NASCITA"), rs1.getString("LUOGO_NASCITA"), rs1.getString("PROVINCIA_NASCITA"),
-						rs1.getString("REGIONE_RESIDENZA"), rs1.getString("PROVINCIA_RESIDENZA"), rs1.getString("CITTA_RESIDENZA"), rs1.getString("INDIRIZZO"),
-						rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("CELLULARE"));
-				operatoriUfficio.add(a);
-			}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		ConnessioneDB.closeConnection(conn);
-		return operatoriUfficio;
-	}
-
-	@Override
-	public ProfiloDB selectProfiloByCF(String cf, TipoAccount tipo) {
-		// TODO Auto-generated method stub
-		ProfiloDB p = null;
-		
-					conn = ConnessioneDB.startConnection(conn, "hospitalmanager");
+					conn = ConnessioneDB.startConnection(conn, "albergo");
 					PreparedStatement ps1;
 					ResultSet rs1;
 		
 					
 					try {
-						String query= "SELECT * from hospitalmanager.ANAGRAFICA WHERE CF = ? and TIPO=?";
+						String query= "SELECT * from user WHERE USERNAME = ? and ID_TIPO=?";
 						ps1 = conn.prepareStatement(query);
-						ps1.setString(1, cf);
+						ps1.setString(1, username);
 						ps1.setString(2, tipo.toString());
 						rs1 = ps1.executeQuery();
 						
 						while (rs1.next()) {
-							 p= new ProfiloDB(rs1.getString("CF"), rs1.getString("TIPO"),
-										rs1.getString("PW"), rs1.getString("SPECIALIZZAZIONE"), rs1.getString("NOME"), rs1.getString("COGNOME"),
-										rs1.getString("SESSO"), rs1.getString("DATA_NASCITA"), rs1.getString("LUOGO_NASCITA"), rs1.getString("PROVINCIA_NASCITA"),
-										rs1.getString("REGIONE_RESIDENZA"), rs1.getString("PROVINCIA_RESIDENZA"), rs1.getString("CITTA_RESIDENZA"), rs1.getString("INDIRIZZO"),
-										rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("CELLULARE"));
+							 prof= new ProfiloDB(rs1.getInt("ID_USER"), rs1.getString("CF"),
+										rs1.getString("NOME"), rs1.getString("COGNOME"), rs1.getString("DATA_NASCITA"), rs1.getString("CELL"),
+										 rs1.getString("VIA"), rs1.getString("CITTA"), rs1.getString("PROVINCIA"),
+										rs1.getString("CAP"), rs1.getString("EMAIL"), rs1.getString("USERNAME"), rs1.getString("PASSWORD"),
+										rs1.getString("ID_TIPO"));
 						}
 					}
 					catch(Exception e){
@@ -199,79 +138,8 @@ public class ProfiloDAO implements IProfiloDAO {
 					}
 					
 					ConnessioneDB.closeConnection(conn);
-					return p;
+					return prof;
 	}
 
-	@Override
-	public boolean insertProfilo(ProfiloDB a) {
-		// TODO Auto-generated method stub
-		conn = ConnessioneDB.startConnection(conn, "hospitalmanager");
-		PreparedStatement ps1;
-		
-		boolean check = true;
-		
-		int lunghezzaMassima = 2;
-		String datiTroncati = a.getSesso().name().substring(0, Math.min(a.getSesso().name().length(), lunghezzaMassima));
-
-		
-		try {
-			String query = "INSERT INTO hospitalmanager.PROFILI VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			ps1 = conn.prepareStatement(query);
-			ps1.setString(1, a.getCf());
-			ps1.setString(2, a.getTipoAcc().name());
-			ps1.setString(3, a.getPw());
-			ps1.setString(4, a.getSpecializzazione());
-			ps1.setString(5, a.getNome());
-			ps1.setString(6, a.getCognome());
-			ps1.setString(7, datiTroncati);
-			ps1.setString(8, a.getDataNascita());
-			ps1.setString(9, a.getLuogoNascita());
-			ps1.setString(10, a.getProvinciaNascita());
-			ps1.setString(11, a.getRegioneRes());
-			ps1.setString(12, a.getProvinciaRes());
-			ps1.setString(13, a.getCittaRes());
-			ps1.setString(14, a.getIndirizzo());
-			ps1.setString(15, a.getCap());
-			ps1.setString(16, a.geteMail());
-			ps1.setString(17, a.getCellulare());
-			
-			
-			//ps1.executeUpdate(query);
-			ps1.executeUpdate();
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			check = false;
-		}
-		
-		ConnessioneDB.closeConnection(conn);
-		return check;
-	}
-
-	@Override
-	public boolean updatePw(String cf, TipoAccount tipo, String pw) {
-		// TODO Auto-generated method stub
-		conn = ConnessioneDB.startConnection(conn, "hospitalmanager");
-		PreparedStatement ps1;
-		
-		boolean check = true;
-		
-		try {
-			String query = "UPDATE hospitalmanager.PROFILI SET PW = ? WHERE CF = ?";
-			ps1 = conn.prepareStatement(query);
-			ps1.setString(1, pw);	
-			ps1.setString(2, cf);
-			//ps1.executeUpdate(query);
-			ps1.executeUpdate();
-			
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			check = false;
-		}
-		
-		ConnessioneDB.closeConnection(conn);
-		return check;
-	}
 }
 

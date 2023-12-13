@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import it.unipv.sfw.view.account.ClientePanel;
+import it.unipv.sfw.view.account.DipendentePanel;
 import it.unipv.sfw.view.login.LoginPanel;
 import it.unipv.sfw.view.prenotazione.CancellaPrenotazionePanelCliente;
 import it.unipv.sfw.view.prenotazione.PrenotaPanelCliente;
@@ -19,6 +20,7 @@ public class ViewController extends JFrame {
 	private JPanel panel;
 	private LoginPanel loginP;
 	private ClientePanel ClienteC;
+	private DipendentePanel DipendenteD;
 	private PrenotaPanelCliente prenotatiC;
 	private CancellaPrenotazionePanelCliente cancellaPre;
 	
@@ -53,6 +55,10 @@ public class ViewController extends JFrame {
 		panel.add(cancellaPre);
 		cancellaPre.setVisible(false);
 		
+		DipendenteD = new DipendentePanel();
+		panel.add(DipendenteD);
+		DipendenteD.setVisible(false);
+		
 		
 		frame.setVisible(true);
 		
@@ -62,7 +68,7 @@ public class ViewController extends JFrame {
 		return loginP;
 	}
 
-	public ClientePanel getPazientePanel() {
+	public ClientePanel getClientePanel() {
 		return ClienteC;
 	}
 
@@ -72,6 +78,10 @@ public class ViewController extends JFrame {
 
 	public CancellaPrenotazionePanelCliente getCancellaPanelPaziente() {
 		return cancellaPre;
+	}
+	
+	public DipendentePanel getDipendentePanel() {
+		return DipendenteD;
 	}
 
 	}

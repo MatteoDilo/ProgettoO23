@@ -1,12 +1,11 @@
 package it.unipv.sfw.model.persona;
 
-import java.util.ArrayList;
 
 //import it.unipv.sfw.model.prenotazione.IPrenotazione;
 //import it.unipv.sfw.model.prenotazione.TipoPrestazione;
 
 public interface IDipendenti {
-	boolean eliminaPrenotazioniErogate();
+//	boolean eliminaPrenotazioniErogate();
 	//ArrayList<IPrenotazione> getCalendario();
 	//void setCalendario(ArrayList<IPrenotazione> calendario);
 }

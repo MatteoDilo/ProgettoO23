@@ -2,66 +2,42 @@ package it.unipv.sfw.model.persona;
 
 import javax.security.auth.login.LoginException;
 
-import it.unipv.sfw.model.prenotazione.TipoPrestazione;
-
 public abstract class Account implements IAccount {
+	private int id_user;
 	private String cf;
-	private String pw;
-	private TipoAccount tipoAcc;
 	private String nome;
 	private String cognome;
 	private String dataNascita;
-	private String luogoNascita;
-	private String provinciaNascita;
-	private String regioneRes;
-	private String provinciaRes;
-	private String cittaRes;
+	private String cellulare;
 	private String indirizzo;
+	private String citta;	
+	private String provincia;
 	private String cap;
 	private String eMail;
-	private String cellulare;
+	private String username;
+	private String pw;
+	private TipoAccount tipoAcc;
 	
-	
-	public Account(String cf,String pw, TipoAccount tipoAcc, String nome,
-			String cognome, String dataNascita, String luogoNascita, String provinciaNascita,
-			String regioneRes, String provinciaRes, String cittaRes, String indirizzo, String cap, String eMail,
-			String cellulare) {
+	public Account(int id_user, String cf, String nome, String cognome, String dataNascita,
+					String cellulare, String indirizzo, String citta, String provincia,
+					String cap, String eMail, String username,String pw, TipoAccount tipoAcc) {
 		super();
+		this.id_user = id_user;
 		this.cf = cf;
-		this.pw = pw;
-		this.tipoAcc = tipoAcc;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
-		this.luogoNascita = luogoNascita;
-		this.provinciaNascita = provinciaNascita;
-		this.regioneRes = regioneRes;
-		this.provinciaRes = provinciaRes;
-		this.cittaRes = cittaRes;
+		this.cellulare = cellulare;
 		this.indirizzo = indirizzo;
+		this.citta = citta;
+		this.provincia = provincia;
 		this.cap = cap;
 		this.eMail = eMail;
-		this.cellulare = cellulare;
-	}
+		this.username = username;
+		this.pw = pw;
+		this.tipoAcc = tipoAcc;
+			}
 
-	public TipoPrestazione getSpecializzazione() {
-		return null;
-	}
-	
-	public boolean setPw(String vecchiaPw, String nuovaPw) throws LoginException {
-		boolean check = false;
-		if(controllaPw(vecchiaPw)) {
-			if(vecchiaPw.endsWith(nuovaPw)) {
-				throw new LoginException("La nuova password non può essere uguale a quella corrente");
-			}
-			else {
-				this.setPw(nuovaPw);
-				check = true;
-			}
-		}
-		
-		return check;
-	}
 	
 	public boolean controllaPw(String pw) throws LoginException{
 		boolean check = false;
@@ -92,12 +68,12 @@ public abstract class Account implements IAccount {
 		this.tipoAcc = tipoAcc;
 	}
 
-	public String getCf() {
-		return cf;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setCf(String cf) {
-		this.cf = cf;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getNome() {
@@ -124,44 +100,12 @@ public abstract class Account implements IAccount {
 		this.dataNascita = dataNascita;
 	}
 
-	public String getLuogoNascita() {
-		return luogoNascita;
+	public String getCitta() {
+		return citta;
 	}
 
-	public void setLuogoNascita(String luogoNascita) {
-		this.luogoNascita = luogoNascita;
-	}
-
-	public String getProvinciaNascita() {
-		return provinciaNascita;
-	}
-
-	public void setProvinciaNascita(String provinciaNascita) {
-		this.provinciaNascita = provinciaNascita;
-	}
-
-	public String getRegioneRes() {
-		return regioneRes;
-	}
-
-	public void setRegioneRes(String regioneRes) {
-		this.regioneRes = regioneRes;
-	}
-
-	public String getProvinciaRes() {
-		return provinciaRes;
-	}
-
-	public void setProvinciaRes(String provinciaRes) {
-		this.provinciaRes = provinciaRes;
-	}
-
-	public String getCittaRes() {
-		return cittaRes;
-	}
-
-	public void setCittaRes(String cittaRes) {
-		this.cittaRes = cittaRes;
+	public void setCitta(String citta) {
+		this.citta = citta;
 	}
 
 	public String getIndirizzo() {
@@ -196,6 +140,26 @@ public abstract class Account implements IAccount {
 		this.cellulare = cellulare;
 	}
 	
+	public String getProvincia() {
+		return provincia;
+	}
 	
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+	
+	public int getId_User() {
+		return id_user;
+	}
+	public void setId_User(int id_user) {
+		this.id_user = id_user;
+	}
+	
+	public String getCF() {
+		return cf;
+	}
+	public void setCF(String cf) {
+		this.cf = cf;
+	}
 		
 }

@@ -6,13 +6,11 @@ import javax.swing.*;
 
 public class LoginPanel  extends JPanel{		//PANNELLO DI LOGIN, la prima schermata
 	
-	
 	//la funzionalità di questa riga è stata spiegata in it.unipb.sfw.view
 	private static final long serialVersionUID = 1L;
-	
 	private JPanel contentPane;
-	private  JTextField username;
-	private  JPasswordField password;
+	private JTextField username;
+	private JPasswordField password;
 	public JButton btnAccedi;
 	public JButton btnPswdimenticata;
 	public JLabel lblLogin;
@@ -30,12 +28,12 @@ public class LoginPanel  extends JPanel{		//PANNELLO DI LOGIN, la prima schermat
 		btnPswdimenticata = new JButton("Password Dimenticata");
 		
 		//aggiungi a schermo i bottoni e tutto il resto
-		add(username);
-		add(password);
 		add(lblLogin);
+		add(username);
+		add(lblPsw);
+		add(password);
 		add(btnAccedi);
-		add(btnPswdimenticata);
-				
+		add(btnPswdimenticata);			
 	}
 
 
@@ -50,23 +48,23 @@ public class LoginPanel  extends JPanel{		//PANNELLO DI LOGIN, la prima schermat
 	}
 
 
-	public JTextField getUsernameText() {
+	public JTextField getUsername() {
 		return username;
 	}
 
 
-	public void setUsernameText(JTextField usernameText) {
-		this.username = usernameText;
+	public void setUsername(JTextField username) {
+		this.username = username;
 	}
 
 
-	public JPasswordField getPasswordField() {
+	public JPasswordField getPassword() {
 		return password;
 	}
 
 
-	public void setPasswordField(JPasswordField passwordField) {
-		this.password = passwordField;
+	public void setPassword(JPasswordField password) {
+		this.password = password;
 	}
 
 

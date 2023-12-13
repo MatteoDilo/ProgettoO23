@@ -21,13 +21,13 @@ public class ConnessioneDB {
 	//private static ConnessioneDB conn;
 	
 	private static void init() {
-		Properties p = new Properties(System.getProperties());
+		Properties prop = new Properties(System.getProperties());
 		try {
-			p.load(new FileInputStream("properties/properties"));
-			username=p.getProperty(PROPERTYNAME);
-			password=p.getProperty(PROPERTYPSW);
-			dbDriver =p.getProperty(PROPERTYDBDRIVER);
-			dbURL =p.getProperty(PROPERTYDBURL);
+			prop.load(new FileInputStream("properties/properties"));
+			username=prop.getProperty(PROPERTYNAME);
+			password=prop.getProperty(PROPERTYPSW);
+			dbDriver =prop.getProperty(PROPERTYDBDRIVER);
+			dbURL =prop.getProperty(PROPERTYDBURL);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
